@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+<h2>认证中心</h2>
+<form action="/server/login" method="post">
+    <p>
+        <label for="username">用户名：</label>
+        <input type="text" name="username" id="username">
+    </p>
+    <p>
+        <label for="password">密码：</label>
+        <input type="password" name="password" id="password">
+    </p>
+    <!--重定向url-->
+    <input type="hidden" name="redirect_url" id="redirect_url">
+    <p>
+        <button type="button" id="login_btn">登录</button>
+        <input hidden="hidden" type="submit" id="submit_btn">
+    </p>
+</form>
+<script>
+    function getUrlParams() {
+        let url = window.location.href
+        let urlStr = url.split('?')[1]
+        const urlSearchParams = new URLSearchParams(urlStr)
+        return Object.fromEntries(urlSearchParams.entries())
+    }
+    // 当用户点击登录按钮时，获取当前页面url中的redirect_url参数 ，然后将其赋值给隐藏的redirect_url
+    document.getElementById('login_btn').addEventListener('click', function () {
+        let urlParams = getUrlParams()
+        document.getElementById('redirect_url').value = urlParams.redirect_url
+        console.log(document.getElementById('redirect_url').value)
+        document.getElementById('submit_btn').click()
+    });
+</script>
+</body>
+</html>

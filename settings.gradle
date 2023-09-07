@@ -1,0 +1,4 @@
+rootProject.name = 'sso-demo'
+include 'client'
+include 'server'
+
